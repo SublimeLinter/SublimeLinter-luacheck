@@ -1,7 +1,7 @@
 SublimeLinter-luacheck
 ================================
 
-[![Build Status](https://travis-ci.org/SublimeLinter/SublimeLinter-luacheck.svg?branch=master)](https://travis-ci.org/SublimeLinter/SublimeLinter-luacheck)
+[![Build Status](https://travis-ci.org/SublimeLinter/SublimeLinter-luacheck.svg)](https://travis-ci.org/SublimeLinter/SublimeLinter-luacheck)
 
 This linter plugin for [SublimeLinter][docs] provides an interface to [luacheck][]. It will be used with files that have the “Lua” syntax.
 
