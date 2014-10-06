@@ -22,7 +22,7 @@ class Luacheck(Linter):
         '--ignore:,': ['channel'],
         '--only:,': [],
         '--limit=': None,
-        '--globals: ': [],
+        '--globals:,': [],
     }
     comment_re = r'\s*--'
     inline_settings = 'limit'
