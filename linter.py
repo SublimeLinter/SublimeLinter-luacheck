@@ -28,7 +28,7 @@ class Luacheck(Linter):
     inline_settings = 'limit'
     inline_overrides = ('ignore', 'only', 'globals')
     cmd = 'luacheck @ *'
-    regex = r'^(c:)?(?P<filename>[^:]+):(?P<line>\d+):(?P<col>\d+): (?P<message>.*)$'
+    regex = r'^(?P<filename>.+):(?P<line>\d+):(?P<col>\d+): (?P<message>.*)$'
 
     def build_args(self, settings):
         """Return args, transforming --ignore, --only, and --globals args into a format luacheck understands."""
