@@ -27,6 +27,7 @@ class Luacheck(Linter):
     comment_re = r'\s*--'
     inline_settings = 'limit'
     inline_overrides = ('ignore', 'only', 'globals')
+    config_file = ('--config', '.luacheckrc', '~')
     cmd = 'luacheck @ *'
     regex = r'^(?P<filename>.+):(?P<line>\d+):(?P<col>\d+): (?P<message>.*)$'
 
