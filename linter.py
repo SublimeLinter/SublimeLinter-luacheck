@@ -2,6 +2,7 @@
 # linter.py
 # Linter for SublimeLinter3, a code checking framework for Sublime Text 3
 #
+# Copyright (c) 2015-2017 The SublimeLinter Community
 # Copyright (c) 2014 CorvisaCloud, LLC
 #
 # License: MIT
@@ -16,30 +17,21 @@ class Luacheck(Linter):
     """Provides an interface to luacheck."""
 
     syntax = 'lua'
-    tempfile_suffix = 'lua'
-    defaults = {
-        '--ignore:,': ['channel'],
-        '--only:,': [],
-        '--limit=': None,
-        '--globals:,': [],
-    }
-    comment_re = r'\s*--'
-    inline_settings = 'limit'
-    inline_overrides = ('ignore', 'only', 'globals')
-    config_file = ('--config', '.luacheckrc', '~')
-    cmd = 'luacheck @ *'
-    regex = r'^(?P<filename>.+):(?P<line>\d+):(?P<col>\d+): (?P<message>.*)$'
+    cmd = 'luacheck - --formatter=plain --codes --ranges --filename @'
 
-    def build_args(self, settings):
-        """Return args, transforming --ignore, --only, and --globals args into a format luacheck understands."""
-        args = super().build_args(settings)
+    version_args = '--help'
+    version_re = r'[Ll]uacheck (?P<version>\d+\.\d+\.\d+)'
+    version_requirement = '>= 0.11.0, < 1.0.0'
 
-        for arg in ('--ignore', '--only', '--globals'):
-            try:
-                index = args.index(arg)
-                values = args[index + 1].split(',')
-                args[index + 1:index + 2] = values
-            except ValueError:
-                pass
+    regex = (
+        r'^.+:(?P<line>\d+):(?P<col>\d+)\-(?P<col_end>\d+): '
+        r'\((?:(?P<error>E)|(?P<warning>W))\d+\) '
+        r'(?P<message>.+)'
+    )
 
-        return args
+    def split_match(self, match):
+        """Patch regex matches to highlight token correctly."""
+        match, line, col, error, warning, msg, _ = super().split_match(match)
+        col_end = int(match.group(3))
+        token_len = col_end - col
+        return match, line, col, error, warning, msg, "." * token_len
