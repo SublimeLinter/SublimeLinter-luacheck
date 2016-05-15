@@ -13,7 +13,6 @@ from SublimeLinter.lint import Linter
 
 
 class Luacheck(Linter):
-
     """Provides an interface to luacheck."""
 
     syntax = 'lua'
