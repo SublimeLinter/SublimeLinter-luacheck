@@ -16,7 +16,7 @@ class Luacheck(Linter):
     """Provides an interface to luacheck."""
 
     syntax = 'lua'
-    tempfile_suffix = 'lua'
+    # tempfile_suffix = 'lua'
     defaults = {
         '--ignore:,': ['channel'],
         '--only:,': [],
@@ -27,7 +27,7 @@ class Luacheck(Linter):
     inline_settings = 'limit'
     inline_overrides = ('ignore', 'only', 'globals')
     config_file = ('--config', '.luacheckrc', '~')
-    cmd = 'luacheck @ *'
+    cmd = 'luacheck --filename @ - *'
     regex = r'^(?P<filename>.+):(?P<line>\d+):(?P<col>\d+): (?P<message>.*)$'
 
     def build_args(self, settings):
