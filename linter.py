@@ -10,6 +10,7 @@
 """This module exports the Luacheck plugin class."""
 
 from SublimeLinter.lint import Linter
+import os.path
 
 
 class Luacheck(Linter):
@@ -39,6 +40,17 @@ class Luacheck(Linter):
                 index = args.index(arg)
                 values = args[index + 1].split(',')
                 args[index + 1:index + 2] = values
+            except ValueError:
+                pass
+
+        if self.filename:
+            try:
+                configIndex = args.index('--config')
+                configDir = os.path.dirname(args[configIndex + 1])
+                relativeFilename = os.path.relpath(self.filename, configDir)
+
+                args.append('--filename')
+                args.append(relativeFilename)
             except ValueError:
                 pass
 
