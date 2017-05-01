@@ -30,6 +30,12 @@ class Luacheck(Linter):
     )
 
     def split_match(self, match):
+        """
+        Extract and return values from match.
+
+        The argument match may be None, in which case the call to super().split_match(match) will return
+        None values for all values except msg which will be an empty string
+        """
         if match:
             """Patch regex matches to highlight token correctly."""
             match, line, col, error, warning, msg, _ = super().split_match(match)
