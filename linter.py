@@ -25,7 +25,7 @@ class Luacheck(Linter):
 
     regex = (
         r'^.+:(?P<line>\d+):(?P<col>\d+)\-(?P<col_end>\d+): '
-        r'\((?:(?P<error>E)|(?P<warning>W))\d+\) '
+        r'\((?:(?P<error>E\d+)|(?P<warning>W))\d+\) '
         r'(?P<message>.+)'
     )
 
