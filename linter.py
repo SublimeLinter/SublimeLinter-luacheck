@@ -1,33 +1,16 @@
-#
-# linter.py
-# Linter for SublimeLinter3, a code checking framework for Sublime Text 3
-#
-# Copyright (c) 2015-2017 The SublimeLinter Community
-# Copyright (c) 2014 CorvisaCloud, LLC
-#
-# License: MIT
-#
-
-"""This module exports the Luacheck plugin class."""
-
 from SublimeLinter.lint import Linter
 
 
 class Luacheck(Linter):
-    """Provides an interface to luacheck."""
-
-    syntax = 'lua'
-    cmd = 'luacheck - --formatter=plain --codes --ranges --filename @'
-
-    version_args = '--help'
-    version_re = r'[Ll]uacheck (?P<version>\d+\.\d+\.\d+)'
-    version_requirement = '>= 0.11.0, < 1.0.0'
-
+    cmd = 'luacheck - --formatter=plain --codes --ranges --filename ${file}'
     regex = (
         r'^.+:(?P<line>\d+):(?P<col>\d+)\-(?P<col_end>\d+): '
         r'\((?:(?P<error>E\d+)|(?P<warning>W\d+))\) '
         r'(?P<message>.+)'
     )
+    defaults = {
+        'selector': 'source.lua'
+    }
 
     def split_match(self, match):
         """Patch regex matches to highlight token correctly."""
