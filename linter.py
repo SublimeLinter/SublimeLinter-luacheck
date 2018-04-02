@@ -9,7 +9,7 @@ class Luacheck(Linter):
         r'(?P<message>.+)'
     )
     defaults = {
-        'selector': 'source.lua'
+        'selector': 'source.lua, source.luae'
     }
 
     def split_match(self, match):
