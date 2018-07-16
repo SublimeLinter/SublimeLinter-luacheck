@@ -25,14 +25,5 @@ The docs cover [troubleshooting PATH configuration](http://sublimelinter.com/en/
 - SublimeLinter settings: http://sublimelinter.com/en/latest/settings.html
 - Linter settings: http://sublimelinter.com/en/latest/linter_settings.html
 
-Additional SublimeLinter-luacheck settings:
-
-|Setting|Description|
-|:------|:----------|
-|ignore|Do not report warnings related to these variables|
-|only|Only report warnings related to these variables|
-|globals|Defined globals|
-|limit|The maximum number of warnings|
-
 The preferred method of configuring `luacheck` is via [.luacheckrc files](http://luacheck.readthedocs.io/en/stable/config.html)
 
